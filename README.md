@@ -20,7 +20,7 @@ La aplicación se puede realizar en parejas. En este caso recomiendo el uso de r
 
 - Se dispone de una base de datos en formato texto (fichero accounts.js).
 - El servidor presenta una API para recibir/enviar datos mediante HTTP (GET & POST)
-- El servidor se arranca mediante ```npm run start````
+- El servidor se arranca mediante ```npm run start```
 - Para documentación sobre la app de servidor, te recomiendo mires los tests (fichero app.test.js)
 - Los endpoints relacionados con alteraciones en las cuentas de los usuarios están autenticados con JWT
   - Ver https://jwt.io/
