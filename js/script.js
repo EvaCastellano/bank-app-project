@@ -42,6 +42,8 @@ btnLogin.addEventListener('click', async function (e) {
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     console.log('login correcto')
+    // Elimino mensaje de error en caso de que en el intento anterior haya estado visible
+    labelError.textContent = ''
     // Mostramos bienvenido $username
     containerApp.style.opacity = 100
     labelWelcome.textContent = `Bienvenido ${
@@ -63,14 +65,15 @@ btnLogin.addEventListener('click', async function (e) {
 
   function displayMovements(movements) {
     containerMovements.innerHTML = ''
-    movements.forEach(function (mov, i) {
-      const type = mov > 0 ? 'deposit' : 'withdrawal'
+    // Se muestran de abajo a arriba (1º 1300, último 200)
+    movements.forEach(function (movements, i) {
+      const type = movements > 0 ? 'deposit' : 'withdrawal'
       const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${
         i + 1
       } ${type}</div>
-          <div class="movements__value">${mov}€</div>
+          <div class="movements__value">${movements.amount}€</div>
         </div>
       `
       containerMovements.insertAdjacentHTML('afterbegin', html)
@@ -81,10 +84,13 @@ btnLogin.addEventListener('click', async function (e) {
   inputLoginPin.blur()
 })
 
+// Balance de la cuenta
 const displayBalance = function (movements) {
   const balance = movements.reduce((amount, mov) => amount + mov.amount, 0)
   labelBalance.textContent = `${balance.toFixed(2)}€`
 }
+
+
 
 const displaySummary = function (movements) {
   const sumIn = movements

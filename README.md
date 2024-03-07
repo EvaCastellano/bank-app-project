@@ -73,3 +73,13 @@ Server is running on port 3000
 ` cd ./server `
 
 ` npm start `
+
+# Objetivos
+* Se hace login y se muestran los movimientos de la cuenta	
+* Se añaden movimientos, ingresos o retiradas de efectivo. Se actualiza tanto en el servidor como en la aplicación.	
+* Se realizan transferencias de dinero de forma satisfactoria	
+* Al realizar transferencias se controla que las cuentas existan y que sean válidas	
+* Al realizar transferencias se controla que haya suficiente dinero en la cuenta y si no lo hay no se efectua la transferencia.	
+* Al realizar movimientos (retiradas) se controla que haya suficiente dinero en la cuenta y si no lo hay no se efectua el movimiento.	
+* Utiliza algún framework de CSS, alguna librería de JS o componente en React para dar funcionalidad.	
+* Calidad de código de JS, refactorizado donde sea necesario
