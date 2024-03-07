@@ -35,6 +35,15 @@ nav {
   font-weight: 500;
 }
 
+.error {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: rgb(255, 56, 56);
+  position: absolute;
+  top: 12%;
+  right: 2%;
+}
+
 .logo {
   height: 5.25rem;
 }

@@ -68,3 +68,8 @@ Server is running on port 3000
 
   13 passing (38ms)
 ```
+
+# Iniciar aplicación 
+` cd ./server `
+
+` npm start `

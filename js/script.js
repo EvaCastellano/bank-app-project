@@ -2,6 +2,7 @@
 
 // Elements
 const labelWelcome = document.querySelector('.welcome')
+const labelError = document.querySelector('.error')
 const labelDate = document.querySelector('.date')
 const labelBalance = document.querySelector('.balance__value')
 const labelSumIn = document.querySelector('.summary__value--in')
@@ -25,39 +26,34 @@ const inputTransferAmount = document.querySelector('.form__input--amount')
 const inputLoanAmount = document.querySelector('.form__input--loan-amount')
 const inputCloseUsername = document.querySelector('.form__input--user')
 const inputClosePin = document.querySelector('.form__input--pin')
+let currentAccount, token
 
 btnLogin.addEventListener('click', async function (e) {
   e.preventDefault()
   // ask ajax request to server for login
   const username = inputLoginUsername.value // juan_s
-  const pin = inputLoginPin.value
+  const pin = inputLoginPin.value // 1111
   const response = await fetch(
     `http://localhost:4000/login?username=${username}&pin=${pin}`
   )
   const datos = await response.json()
-  console.log(datos)
-  
+  currentAccount = datos.account
+  token = datos.token
 
-
-  // si datos está bien o no, haremos updateUI o lo que sea
-
-
-
-  // const currentAccount = accounts.find(
-  //   (account) => account.username === inputLoginUsername.value
-  // )
-  // if (currentAccount?.pin === Number(inputLoginPin.value)) {
-  //   console.log('login correcto')
-  //   // Mostramos bienvenido Juan
-  //   containerApp.style.opacity = 100
-  //   labelWelcome.textContent = `Bienvenido ${
-  //     currentAccount.owner.split(' ')[0]
-  //   }`
-  //   updateUI(currentAccount)
-  // } else {
-  //   console.log('login incorrecto')
-  //   // Mostramos Usuario o contraseña incorrectos
-  // }
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    console.log('login correcto')
+    // Mostramos bienvenido $username
+    containerApp.style.opacity = 100
+    labelWelcome.textContent = `Bienvenido ${
+      currentAccount.owner.split(' ')[0]
+    }`
+    updateUI(currentAccount)
+  } else {
+    console.log('login incorrecto')
+    // Mostramos Usuario o contraseña incorrectos
+    containerApp.style.opacity = 0
+    labelError.textContent = 'Usuario o contraseña incorrectos'
+  }
 
   function updateUI({ movements }) {
     displayMovements(movements)
@@ -86,7 +82,7 @@ btnLogin.addEventListener('click', async function (e) {
 })
 
 const displayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0)
+  const balance = movements.reduce((amount, mov) => amount + mov.amount, 0)
   labelBalance.textContent = `${balance.toFixed(2)}€`
 }
 
